@@ -42,6 +42,9 @@ gem 'blazer'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'loofah', '>= 2.2.3'
+gem 'rack', '>= 2.0.6'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
