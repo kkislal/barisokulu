@@ -1,0 +1,63 @@
+<div class="page-header clear-filter" filter-color="orange">
+  <div class="page-header-image" style="background-image:url(/images/login.jpg)"></div>
+  <div class="content">
+    <div class="container">
+      <div class="col-md-4 ml-auto mr-auto">
+        <div class="card card-login card-plain">
+          <%= form_tag(main_new_user_path, :method => :post) do %>
+            <div class="card-header text-center">
+              <div class="logo-container">
+                <img class="rounded-circle img-raised" src="/images/meditation_logo.png" alt="">
+              </div>
+            </div>
+            <div class="card-body">
+              <% if notice %>
+              <div class="alert alert-danger" role="alert">
+                <div class="container">
+                  <strong>Ups... <%= notice %></strong>
+                </div>
+              </div>
+              <% end %>
+              <div class="input-group no-border">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="now-ui-icons users_single-02"></i>
+                  </span>
+                </div>
+                <%= text_field_tag(:name, params[:name],:type => "text" , :class => "form-control", :placeholder => "İsim Soyisim...") %>
+              </div>
+              <div class="input-group no-border">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="now-ui-icons ui-1_email-85"></i>
+                  </span>
+                </div>
+                <%= text_field_tag(:email, params[:email],:type => "text" , :class => "form-control", :placeholder => "Email...") %>
+              </div>
+              <div class="input-group no-border">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="now-ui-icons objects_key-25"></i>
+                  </span>
+                </div>
+                <%= password_field_tag(:password, params[:password],:type => "password" , :class => "form-control", :placeholder => "Şifre...") %>
+              </div>
+              <div class="input-group no-border">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="now-ui-icons objects_key-25"></i>
+                  </span>
+                </div>
+                <%= password_field_tag(:password2, params[:password2],:type => "password" , :class => "form-control", :placeholder => "Şifre Tekrar...") %>
+              </div>
+              <div class="text-center">
+                <button class="btn btn-primary btn-round btn-lg btn-block" type="submit">Üye Ol</button>
+              </div>
+
+              <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

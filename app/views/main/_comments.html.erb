@@ -1,0 +1,15 @@
+<% comments.each do |cmnt| %>
+<div class="card">
+  <div class="card-body">
+    <h6 class="card-title"><%= cmnt.caption %></h6>
+    <span class="comment-text"><%= simple_format(cmnt.comment.html_safe,{},:sanitize => false) %></span>
+    <p><small class="text-muted"><%= cmnt.user.name %> - <%= cmnt.created_at.to_s(:long) %></small></p>
+    <% if current_user && (cmnt.user.id == current_user.id || current_user.auth_level == 9) %>
+      <%= link_to main_delete_comment_path(:comment_id => cmnt.id, :refmodel_id => id, :refmodel_type => refmodel),{"data-confirm" => "Yorumunuzu silmek istediğinizden emin misiniz?", :class => "btn-tooltip","data-toggle" => "tooltip", "data-placement" => "bottom", "data-container" => "body", "data-animation" => "true", "title" => "Yorumu Sil"} do %>
+        <i class="now-ui-icons ui-1_simple-remove"></i>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+<% end %>

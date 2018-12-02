@@ -1,0 +1,8 @@
+toolbar:
+  - formatselect | bold italic strikethrough forecolor backcolor | image link | table | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat
+plugins:
+  - advlist autolink lists link image charmap print preview anchor textcolor
+  - searchreplace visualblocks code fullscreen
+  - insertdatetime media table contextmenu paste code help wordcount
+themes:
+  - modern

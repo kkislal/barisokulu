@@ -1,0 +1,41 @@
+<div class="section section-contact-us text-center">
+  <div class="container">
+    <h5 class="title">Yorum Yaz</h5>
+    <div class="row">
+      <div class="col-lg-8 text-center col-md-8 ml-auto mr-auto">
+        <% if !cmnt.nil? && cmnt.errors.count > 0 %>
+          <div id="error_explanation">
+            <h5>Yorumunuz kaydedilirken hata oluştu!</h5>
+            <ul>
+            <% cmnt.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <%= form_tag(main_add_comment_path) do %>
+            <% if current_user.blank? %>
+              <a href="#pablo" data-toggle="modal" data-target="#modalLogin" class="btn btn-primary btn-round btn-block btn-lg">Önce Siteye Giriş Yapınız</a>
+            <% else %>
+              <div class="input-field">
+                <%= hidden_field_tag :refmodel_type, refmodel %>
+              </div>
+              <div class="input-field">
+                <%= hidden_field_tag :refmodel_id, id %>
+              </div>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">
+                    <i class="now-ui-icons text_caps-small"></i>
+                  </span>
+                </div>
+                <%= text_field_tag :caption, params[:caption],class: "form-control", placeholder:"Yorum Başlığı" %>
+              </div>
+              <%= text_area_tag :comment, params[:comment],rows: "4", :class =>"form-control", placeholder:"Yorumunuz..." %>
+              <button class="btn btn-primary btn-round btn-block btn-lg" type="submit" name="action">Gönder</button>
+            <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

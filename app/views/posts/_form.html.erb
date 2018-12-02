@@ -1,0 +1,61 @@
+<%= form_with(model: post, local: true) do |form| %>
+  <% if post.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% post.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :blog_category_id %>
+    <%= form.collection_select(:blog_category_id,BlogCategory.all,:id,:name) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.select(:status, [['publish', 'publish'], ['draft', 'draft']]) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :comment_count %>
+    <%= form.number_field :comment_count %>
+  </div>
+
+  <div class="field">
+    <%= form.label :view_count %>
+    <%= form.number_field :view_count %>
+  </div>
+
+  <input name="tags" id="tags" type="text" value="<%=@tags%>" data-role="tagsinput" />
+
+  <div class="input-field">
+    <%= form.file_field :img, id: :post_img %>
+  </div>
+  <br>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content, rows: 20, cols: 80, :class => "tinymce", id: :post_content %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<%= tinymce %>

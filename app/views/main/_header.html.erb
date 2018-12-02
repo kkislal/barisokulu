@@ -1,0 +1,40 @@
+<%if sController == "main" && sAction == "index"%>
+  <div class="page-header clear-filter" filter-color="orange">
+    <div class="page-header-image" data-parallax="true" style="background-image:url('/images/IMG_20180413_061534_HDR.jpg');">
+    </div>
+    <div class="container">
+      <div class="content-center brand">
+        <img class="n-logo rounded-circle img-raised" src="/images/meditation_logo.png" alt="">
+        <h1 class="h2">Barış Okulu</h1>
+        <h5>Barış her adımda.<br>
+          Parlayan kırmızı güneş benim kalbim<br>
+          Her çiçek benimle gülümsüyor<br>
+          Büyüyen her şey ne kadar da yeşil ve taze<br>
+          Rüzgar ne kadar da serin esiyor…<br>
+          Barış her adımda.<br>
+          Sonu olmayan bu yolu neşeye çeviriyor.<br><br>
+          – Thich Nath Hanh-</h5>
+      </div>
+    </div>
+  </div>
+<% elsif sController == "users" %>
+
+  <%= render partial: "main/page_header", locals: {sImage: "/images/header_users.jpg", sTitle: "Users" } %>
+
+<% elsif sController == "posts" && sAction == "show" %>
+
+  <%= render partial: "main/page_header", locals: {sImage: url_for(@post.post_img_url), sTitle: @post.title } %>
+
+<% elsif sController == "posts" %>
+
+  <%= render partial: "main/page_header", locals: {sImage: "/images/header_posts.jpg", sTitle: "Yazılar" } %>
+
+<% elsif sController == "blog_categories" %>
+
+  <%= render partial: "main/page_header", locals: {sImage: "/images/header_admin.jpg", sTitle: "Blog Kategorileri" } %>
+
+<% elsif sController == "galleries" %>
+
+  <%= render partial: "main/page_header", locals: {sImage: "/images/header_admin.jpg", sTitle: "Foto Galeri" } %>
+
+<% end %>

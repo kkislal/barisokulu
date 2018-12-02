@@ -1,0 +1,97 @@
+    <div class="index-page wrapper">
+      <div class="section">
+        <div class="container text-center">
+          <div class="row justify-content-md-center">
+            <div class="col-md-12 col-lg-8">
+              <h2 class="title">Bu Sitede Sizi Neler Bekliyor?</h2>
+              <p>Mindfulness ve meditasyon ile ilgili bilgiler, pratik önerileri, günlük hayattan izlenimleri içeren blog yazıları ve ileriki bir zamanda online mindfulness ve meditasyon eğitimleri</p>
+            </div>
+            <div class="text-center col-md-12 col-lg-8">
+              <a href="/posts" class="btn btn-primary btn-lg btn-round" role="button">
+                Yazılara Göz At
+              </a>
+            </div>
+          </div>
+          <br>
+          <br>
+          <br>
+        </div>
+      </div>
+      <div class="section" id="#download-section" data-background-color="black">
+        <div class="container">
+          <div class="row justify-content-md-center">
+            <div class="text-center col-md-12 col-lg-8">
+              <h3 class="title">Barış Okulunda Neyi Amaçlıyoruz?</h3>
+              <h5 class="description">Her anın içeriğiyle barış halinde olmak mümkün.<br><br>
+                  Her an, her nefeste bu ‘ben’ dediğimiz şeyi görmek, onunla barışmak ve ‘ben’in ötesine geçmek mümkün.<br><br>
+                  Tüm aydınlanmış kişiler bize bunu söylüyor ve bize içimizde ve dışımızda barışı tahsis etmenin yolunu gösteriyorlar. Bu yol içimizden geçiyor. İçimizin derinliklerinde olup bitenleri olduğu gibi görebilmeyi, olanları tarafsızca gözlemleyebilmeyi öğrenmekten geçiyor.<br><br>
+                  Barış okulu, mindfulness ve meditasyon araçlarıyla iç barışımızı tahsis edebilmeyi birlikte öğreneceğimiz bir okul. Sizi de bizimle birlikte bu yolda öğrenmeye ve çalışmaya davet ediyoruz.<br><br>
+                  Niyetimiz, paylaşacağımız yazılarla, online eğitimlerle ve meditasyon pratiği buluşmalarıyla bu yolu pratik ederek öğrenmeye davet etmek ve mevcut pratiğinize destek olacak bir topluluk oluşturmak. Çünkü aydınlanmış kişilerin üstüne basa basa vurguladığı bir şey var ki, o da söylediklerinin sadece gerçeği işaret eden bir parmak olduğu. Gerçeğin kendisi ise ancak kisi tarafından direkt deneyimle edinilebileceği.<br><br>
+                  Ve biz de sizi bu nedenle birlikte çalışmaya davet ediyoruz.<br><br>
+                  Bu okulda hepimiz birer öğrenciyiz.</h5>
+            </div>
+            <div class="text-center col-md-12 col-lg-8">
+              <a href="/posts" class="btn btn-primary btn-lg btn-round" role="button">
+                Yazılara Göz At
+              </a>
+            </div>
+          </div>
+          <br>
+          <br>
+          <br>
+          </div>
+        </div>
+        <div class="section section-signup" style="background-image: url('/images/bg7.jpg'); background-size: cover; background-position: top center; min-height: 700px;">
+          <div class="container">
+            <div class="row">
+              <div class="card card-signup" data-background-color="orange">
+                <%= form_tag(main_new_user_path, :method => :post) do %>
+                  <div class="card-header text-center">
+                    <h3 class="card-title title-up">Üye Ol</h3>
+                  </div>
+                  <div class="card-body">
+                    <div class="input-group no-border">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="now-ui-icons users_single-02"></i>
+                        </span>
+                      </div>
+                      <%= text_field_tag(:name, params[:name],:type => "text" , :class => "form-control", :placeholder => "İsim Soyisim...") %>
+                    </div>
+                    <div class="input-group no-border">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="now-ui-icons ui-1_email-85"></i>
+                        </span>
+                      </div>
+                      <%= text_field_tag(:email, params[:email],:type => "text" , :class => "form-control", :placeholder => "Email...") %>
+                    </div>
+                    <div class="input-group no-border">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="now-ui-icons objects_key-25"></i>
+                        </span>
+                      </div>
+                      <%= password_field_tag(:password, params[:password],:type => "password" , :class => "form-control", :placeholder => "Şifre...") %>
+                    </div>
+                    <div class="input-group no-border">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="now-ui-icons objects_key-25"></i>
+                        </span>
+                      </div>
+                      <%= password_field_tag(:password2, params[:password2],:type => "password" , :class => "form-control", :placeholder => "Şifre Tekrar...") %>
+                    </div>
+                  </div>
+                  <div class="card-footer text-center">
+                    <div class="text-center">
+                      <button class="btn btn-neutral btn-round btn-lg" type="submit">Kayıt Ol</button>
+                    </div>
+                  </div>
+                  <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

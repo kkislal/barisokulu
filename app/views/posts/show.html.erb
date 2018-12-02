@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-10 ml-auto mr-auto">
+      <p><%= @post.content.html_safe %></p>
+      <h5 class="small mt-5">Yazan: <%= link_to @post.user.name,controller: "posts", action: "list",po: @post.user.id %></h5>
+      <h5 class="small">Kategori: <%= link_to @post.blog_category.name ,controller: "posts", action: "list",cat: @post.blog_category.id %></h5>
+      <% if @post.tags.size > 0 %>
+        <h5 class="small">Etiketler:
+          <% @post.tags.each do |tag| %>
+            <%= link_to controller: "posts", action: "list",tag: tag.tag do %>
+              <span class="badge badge-primary"><%= tag.tag %></span>
+            <% end %>
+          <% end %>
+        </h5>
+      <% end %>
+
+      <% if @post_comments.size > 0 %>
+      <div class="row">
+        <div class="container text-center">
+          <h5 class="title">Yorumlar</h5>
+        </div>
+      <%= render partial: "main/comments", locals: {comments: @post_comments, refmodel: "Post", id: @post.id} %>
+      </div>
+      <% end %>
+
+      <% if !current_user || @post_comments.where(:user_id => current_user.id).blank? %>
+      <%= render partial: "main/addComment", locals: {cmnt: @cmnt, refmodel: "Post", id: @post.id} %>
+      <% end %>
+
+
+
+    </div>
+  </div>
+</div>
+
+
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>

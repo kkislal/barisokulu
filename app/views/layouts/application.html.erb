@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Barış Okulu</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body class="<%=page_css(controller.controller_name,controller.action_name)%> sidebar-collapse" data-controller="<%=controller.controller_name%>" data-action="<%=controller.action_name%>" >
+
+      <!-- Navbar -->
+      <nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent " color-on-scroll="400">
+        <div class="container">
+          <div class="navbar-translate">
+            <a class="navbar-brand" href="/">
+              BARIŞ OKULU
+            </a>
+            <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-bar top-bar"></span>
+              <span class="navbar-toggler-bar middle-bar"></span>
+              <span class="navbar-toggler-bar bottom-bar"></span>
+            </button>
+          </div>
+          <div class="collapse navbar-collapse justify-content-end" id="navigation" data-nav-image="/images/blurred-image-1.jpg">
+            <ul class="navbar-nav">
+              <% unless current_user %>
+              <li class="nav-item">
+                <a class="nav-link" rel="tooltip" title="Kayıt Ol" data-placement="bottom" href="/main/register">
+                  <i class="now-ui-icons business_badge"></i>
+                  <p>Kayıt Ol</p>
+                </a>
+              </li>
+              <% end %>
+              <li class="nav-item">
+                <a class="nav-link" href="/posts">
+                  <i class="now-ui-icons files_paper"></i>
+                  <p>Yazılar</p>
+                </a>
+              </li>
+              <% unless current_user %>
+              <li class="nav-item">
+                <a class="nav-link" rel="tooltip" title="Giriş" data-placement="bottom" data-toggle="modal" data-target="#modalLogin">
+                  <i class="now-ui-icons users_single-02"></i>
+                  <p class="d-lg-none d-xl-none">Giriş</p>
+                </a>
+              </li>
+              <% else %>
+              <li class="nav-item">
+                <a class="nav-link" href="/">
+                  <i class="now-ui-icons users_circle-08"></i>
+                  <p><%= current_user.name %></p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" rel="tooltip" title="Çıkış" data-placement="bottom" href="/main/logout">
+                  <i class="now-ui-icons sport_user-run"></i>
+                  <p class="d-lg-none d-xl-none">Çıkış</p>
+                </a>
+              </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <!-- End Navbar -->
+
+      <%= render partial: "main/header", locals: {sController: controller.controller_name, sAction: controller.action_name } %>
+
+    <%= yield %>
+
+    <!-- Login Modal -->
+    <div class="modal fade modal-mini modal-primary" id="modalLogin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header justify-content-center">
+            <div class="modal-profile">
+              <i class="far fa-user fa-10x"></i>
+            </div>
+          </div>
+          <div class="modal-body">
+            <%= form_tag(main_attempt_login_path, :method => :post) do %>
+            <%= hidden_field_tag(:login_org_url, params[:login_org_url]) %>
+            <div class="input-group no-border">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="now-ui-icons ui-1_email-85"></i>
+                </span>
+              </div>
+              <%= text_field_tag(:email, params[:email],:type => "text" , :class => "form-control", :placeholder => "Email...") %>
+            </div>
+            <div class="input-group no-border">
+              <div class="input-group-prepend">
+                <span class="input-group-text">
+                  <i class="now-ui-icons objects_key-25"></i>
+                </span>
+              </div>
+              <%= password_field_tag(:password, params[:password],:type => "password" , :class => "form-control", :placeholder => "Şifre...") %>
+            </div>
+            <div class="form-check text-center">
+              <label class="form-check-label">
+                <input name="cache_login" id="cache_login" class="form-check-input" type="checkbox" checked>
+                <span class="form-check-sign"></span>
+                <small>Beni Hatırla</small>
+              </label>
+            </div>
+            <div class="text-center">
+              <button class="btn btn-neutral btn-round btn-lg btn-block" type="submit">Giriş</button>
+            </div>
+            <div class="pull-left">
+              <h6>
+                <a href="/main/register" class="link">YENİ HESAP OLUŞTUR...</a>
+              </h6>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--  End Modal -->
+
+  </body>
+
+</html>

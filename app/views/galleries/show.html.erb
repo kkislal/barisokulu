@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @gallery.title %>
+  <br/>
+  <strong>Total Image Count:</strong>
+  <%= @gallery.images.count %>
+
+  <div class="row">
+  <% @gallery.images.count.downto(1) do  |image| %>
+    <div class="col-md-4" style="height:350px;">
+      <%= image_tag(@gallery.images[image-1], {class: "materialboxed" , style: "height:200px; width=auto;"}) %>
+      <%= link_to delete_image_gallery_path(img_id: @gallery.images[image-1]),{method: :delete, "data-confirm" => "Galeriden imajı silmek istediğinizden emin misiniz?", :class => "btn-tooltip","data-toggle" => "tooltip", "data-placement" => "bottom", "data-container" => "body", "data-animation" => "true", "title" => "İmajı Sil"} do %>
+        <i class="now-ui-icons ui-1_simple-remove"></i>
+      <% end %><br/>
+      <div class="textarea-container">
+      <%= text_area_tag("image#{image-1}" , rails_blob_url(@gallery.images[image-1]), rows: 4, class: "form-control") %><br/>
+      </div>
+      <%= button_tag("Linki Kopyala",onclick: "fCopyText('image#{image-1}')", type: :button) %>
+    </div>
+  <% end %>
+
+  </div>
+
+</p>
+
+<script>
+function fCopyText(elementID) {
+  var copyText = document.getElementById(elementID);
+  copyText.select();
+  document.execCommand("copy");
+  alert("Link kopyalandı");
+}
+</script>
+
+<%= link_to 'Edit', edit_gallery_path(@gallery) %> |
+<%= link_to 'Back', galleries_path %>
