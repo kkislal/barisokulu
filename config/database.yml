@@ -14,8 +14,8 @@ default: &default
   encoding: utf8
   collation: utf8_turkish_ci
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: root
-  password: Passw0rd
+  username: dummy
+  password: password
   host: localhost
 
 development:
