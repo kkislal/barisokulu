@@ -156,6 +156,14 @@ def add_comment
     end
     @cmnt.refmodel.save
     redirect_to post_path(params[:refmodel_id])
+  elsif params[:refmodel_type] == "Event"
+      if @cmnt.refmodel.comment_count.blank?
+         @cmnt.refmodel.comment_count = 1
+      else
+        @cmnt.refmodel.comment_count += 1
+      end
+      @cmnt.refmodel.save
+      redirect_to event_path(params[:refmodel_id])
   end
 
 
@@ -175,6 +183,10 @@ def delete_comment
       @cmnt.refmodel.comment_count -= 1
       @cmnt.refmodel.save
       redirect_to post_path(params[:refmodel_id]) , notice: s_notice
+    elsif params[:refmodel_type] == "Event"
+        @cmnt.refmodel.comment_count -= 1
+        @cmnt.refmodel.save
+        redirect_to event_path(params[:refmodel_id]) , notice: s_notice
     end
 
   else

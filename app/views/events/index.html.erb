@@ -1,0 +1,85 @@
+<p id="notice"><%= notice %></p>
+<br/>
+<div class="container">
+  <% if !@PageTitle.blank? %>
+  <div class="row">
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4">
+        <hr/>
+        <h6 class="text-center"><%= @PageTitle %></h6>
+        <hr/>
+    </div>
+    <div class="col-md-4">
+    </div>
+  </div>
+  <% end %>
+
+  <div class="row">
+    <div class="col-md-10">
+
+      <% @events.each_with_index do |event,i| %>
+        <div class="row">
+          <div class="col-md-5">
+            <%= link_to(event) do %>
+              <img src="<%= url_for(event.event_img_url) %>">
+            <% end %>
+          </div>
+          <div class="col-md-7">
+            <%= link_to(event) do %>
+              <h4 style="margin-top: 0em;"><%= event.title %></h4>
+            <% end %>
+            <p class="card-text"><%= strip_tags(event.content).truncate(150) %></p>
+            <h5 class="small">Tarih: <%= format_event_date(event) %> </h5>
+            <h5 class="small">Saat: <%= event.event_time %> </h5>
+            <h5 class="small">Kategori: <%= link_to event.event_category.name ,controller: "events", action: "list",cat: event.event_category.id %></h5>
+            <% if event.tags.size > 0 %>
+              <h5 class="small">Etiketler:
+                <% event.tags.each do |tag| %>
+                  <%= link_to controller: "events", action: "list",tag: tag.tag do %>
+                    <span class="badge badge-primary"><%= tag.tag %></span>
+                  <% end %>
+                <% end %>
+              </h5>
+            <% end %>
+          </div>
+        </div>
+        <hr style="margin-bottom: 5em; margin-top: 2em; "/>
+      <% end %>
+    </div>
+    <div class="col-md-2">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="dropdown">
+            <button style="margin-top: 2em;" class="btn btn-primary btn-round dropdown-toggle btn-block" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Kategoriler
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <%= link_to "Tüm Etkinlikler",{controller: "events", action: "index"},{class: "dropdown-item"} %>
+              <% EventCategory.all.each do |bc| %>
+                <%= link_to bc.name,{controller: "events", action: "list",cat: bc.id},{class: "dropdown-item"} %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <div class="dropdown">
+            <button class="btn btn-primary btn-round dropdown-toggle btn-block" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Etiketler
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <%= link_to "Tüm Etkinlikler",{controller: "events", action: "index"},{class: "dropdown-item"} %>
+              <% Tag.scp_event_tags.each do |tag| %>
+                <%= link_to tag.tag,{controller: "events", action: "list",tag: tag.tag},{class: "dropdown-item"} %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% if power_user? %>
+<%= link_to 'Yeni Etkinlik', new_event_path %>
+<% end %>

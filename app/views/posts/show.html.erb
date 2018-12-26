@@ -35,6 +35,7 @@
   </div>
 </div>
 
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
+<% if power_user? %>
+<%= link_to 'Yazıyı değiştir', edit_post_path(@post) %>
+<%= link_to 'Yazıyı Sil', @post, method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>

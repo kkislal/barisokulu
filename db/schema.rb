@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_30_201010) do
+ActiveRecord::Schema.define(version: 2018_12_13_182100) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -141,6 +141,37 @@ ActiveRecord::Schema.define(version: 2018_10_30_201010) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "event_categories", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "event_types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "events", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "event_category_id"
+    t.bigint "event_type_id"
+    t.string "title"
+    t.text "content"
+    t.string "status"
+    t.integer "comment_count"
+    t.integer "view_count"
+    t.date "start_date"
+    t.date "end_date"
+    t.string "event_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_category_id"], name: "index_events_on_event_category_id"
+    t.index ["event_type_id"], name: "index_events_on_event_type_id"
+    t.index ["user_id"], name: "index_events_on_user_id"
+  end
+
   create_table "galleries", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_turkish_ci", force: :cascade do |t|
     t.string "title"
     t.datetime "created_at", null: false
@@ -181,6 +212,9 @@ ActiveRecord::Schema.define(version: 2018_10_30_201010) do
   end
 
   add_foreign_key "comments", "users"
+  add_foreign_key "events", "event_categories"
+  add_foreign_key "events", "event_types"
+  add_foreign_key "events", "users"
   add_foreign_key "posts", "blog_categories"
   add_foreign_key "posts", "users"
 end

@@ -39,6 +39,20 @@
                 </a>
               </li>
               <% end %>
+              <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle" id="navbarDDEtkinlikler" data-toggle="dropdown">
+                  <i class="now-ui-icons objects_diamond"></i>
+                  <p>Etkinlikler</p>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDDEtkinlikler">
+                  <a class="dropdown-item" href="/events/list?qlink=current">
+                    Güncel Etkinlikler
+                  </a>
+                  <a class="dropdown-item" href="/events/list?qlink=old">
+                    Geçmiş Etkinlikler
+                  </a>
+                </div>
+              </li>
               <li class="nav-item">
                 <a class="nav-link" href="/posts">
                   <i class="now-ui-icons files_paper"></i>
@@ -104,13 +118,13 @@
               </div>
               <%= password_field_tag(:password, params[:password],:type => "password" , :class => "form-control", :placeholder => "Şifre...") %>
             </div>
-            <div class="form-check text-center">
+<!--            <div class="form-check text-center">
               <label class="form-check-label">
                 <input name="cache_login" id="cache_login" class="form-check-input" type="checkbox" checked>
                 <span class="form-check-sign"></span>
                 <small>Beni Hatırla</small>
               </label>
-            </div>
+            </div> -->
             <div class="text-center">
               <button class="btn btn-neutral btn-round btn-lg btn-block" type="submit">Giriş</button>
             </div>

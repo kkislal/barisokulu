@@ -15,6 +15,13 @@ Rails.application.routes.draw do
 
   mount Blazer::Engine, at: "blazer"
 
+  resources :events  do
+    collection do
+      get :list
+      get :search
+    end
+  end
+
   resources :posts  do
     collection do
       get :list
@@ -30,6 +37,8 @@ Rails.application.routes.draw do
 
   resources :blog_categories
   resources :users
+  resources :event_types
+  resources :event_categories
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

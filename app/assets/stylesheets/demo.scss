@@ -504,3 +504,14 @@
     display: none !important;
   }
 }
+
+hr {
+  display: block;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: auto;
+  margin-right: auto;
+  border-style: inset;
+  border-width: 1px;
+  border-top: 1px solid rgba(0,0,0,0.6);
+}

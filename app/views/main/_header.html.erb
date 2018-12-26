@@ -6,14 +6,14 @@
       <div class="content-center brand">
         <img class="n-logo rounded-circle img-raised" src="/images/meditation_logo.png" alt="">
         <h1 class="h2">Barış Okulu</h1>
-        <h5>Barış her adımda.<br>
+        <p class="medium">Barış her adımda.<br>
           Parlayan kırmızı güneş benim kalbim<br>
           Her çiçek benimle gülümsüyor<br>
           Büyüyen her şey ne kadar da yeşil ve taze<br>
           Rüzgar ne kadar da serin esiyor…<br>
           Barış her adımda.<br>
           Sonu olmayan bu yolu neşeye çeviriyor.<br><br>
-          – Thich Nath Hanh-</h5>
+          – Thich Nath Hanh-</p>
       </div>
     </div>
   </div>
@@ -32,6 +32,22 @@
 <% elsif sController == "blog_categories" %>
 
   <%= render partial: "main/page_header", locals: {sImage: "/images/header_admin.jpg", sTitle: "Blog Kategorileri" } %>
+
+<% elsif sController == "event_categories" %>
+
+  <%= render partial: "main/page_header", locals: {sImage: "/images/header_admin.jpg", sTitle: "Etkinlik Kategorileri" } %>
+
+<% elsif sController == "event_types" %>
+
+  <%= render partial: "main/page_header", locals: {sImage: "/images/header_admin.jpg", sTitle: "Etkinlik Tipleri" } %>
+
+<% elsif sController == "events" && sAction == "show" %>
+
+  <%= render partial: "main/page_header", locals: {sImage: url_for(@event.event_img_url), sTitle: @event.title } %>
+
+<% elsif sController == "events" %>
+
+  <%= render partial: "main/page_header", locals: {sImage: "/images/header_events.jpg", sTitle: "Etkinlikler" } %>
 
 <% elsif sController == "galleries" %>
 

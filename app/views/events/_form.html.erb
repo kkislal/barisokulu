@@ -1,0 +1,87 @@
+<%= form_with(model: event, local: true) do |form| %>
+  <% if event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(event.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% event.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :event_category_id %>
+    <%= form.collection_select(:event_category_id,EventCategory.all,:id,:name) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :event_type_id %>
+    <%= form.collection_select(:event_type_id,EventType.all,:id,:name) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :title %>
+    <%= form.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= form.label :status %>
+    <%= form.select(:status, [['publish', 'publish'], ['draft', 'draft']]) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :comment_count %>
+    <%= form.number_field :comment_count %>
+  </div>
+
+  <div class="field">
+    <%= form.label :view_count %>
+    <%= form.number_field :view_count %>
+  </div>
+
+  <%= form.label "Etiketler(etiketi ekledikten sonra tab tuşuna basınız)" %>
+  <input name="tags" id="tags" type="text" value="<%=@tags%>" data-role="tagsinput" />
+
+  <div class="datepicker-container">
+    <div class="form-group">
+      <%= form.label :start_date %>
+      <%= date_select :event, :start_date %>
+    </div>
+  </div>
+
+  <div class="datepicker-container">
+    <div class="form-group">
+      <%= form.label :end_date %>
+      <%= date_select :event, :end_date %>
+    </div>
+  </div>
+
+  <div class="datepicker-container">
+    <div class="form-group">
+      <%= form.label :event_time %>
+      <%= form.text_field :event_time  %>
+    </div>
+  </div>
+
+  <div class="input-field">
+    <%= form.file_field :img, id: :event_img %>
+  </div>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content, rows: 20, cols: 80, :class => "tinymce", id: :event_content %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<%= tinymce %>

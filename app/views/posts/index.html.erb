@@ -7,7 +7,7 @@
     </div>
     <div class="col-md-8">
       <div class="row">
-        <div class="col-md-2 mr-3">
+        <div class="col-sd-2 sr-3">
           <div class="dropdown">
             <button class="btn btn-primary btn-round dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Kategoriler
@@ -20,21 +20,33 @@
             </div>
           </div>
         </div>
-        <div class="col-md-2 mr-3">
+        <div class="col-sd-2 sr-3">
           <div class="dropdown">
             <button class="btn btn-primary btn-round dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Etiketler
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <%= link_to "Tüm yazılar",{controller: "posts", action: "index"},{class: "dropdown-item"} %>
-              <% Tag.all.each do |tag| %>
+              <% Tag.scp_post_tags.each do |tag| %>
                 <%= link_to tag.tag,{controller: "posts", action: "list",tag: tag.tag},{class: "dropdown-item"} %>
               <% end %>
             </div>
           </div>
         </div>
       </div>
-      <h5 class="small text-center"><%= @PageTitle %></h5>
+      <% if !@PageTitle.blank? %>
+      <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+            <hr/>
+            <h6 class="text-center"><%= @PageTitle %></h6>
+            <hr/>
+        </div>
+        <div class="col-md-3">
+        </div>
+      </div>
+      <% end %>
       <div class="row">
 
         <% @posts.each_with_index do |post,i| %>
@@ -95,3 +107,7 @@
     </div>
   </div>
 </div>
+
+<% if power_user? %>
+<%= link_to 'Yeni Yazı', new_post_path %>
+<% end %>
