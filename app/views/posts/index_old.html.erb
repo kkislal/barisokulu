@@ -1,0 +1,113 @@
+<p id="notice"><%= notice %></p>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-2">
+    </div>
+    <div class="col-md-8">
+      <div class="row">
+        <div class="col-sd-2 sr-3">
+          <div class="dropdown">
+            <button class="btn btn-primary btn-round dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Kategoriler
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <%= link_to "Tüm yazılar",{controller: "posts", action: "index"},{class: "dropdown-item"} %>
+              <% BlogCategory.all.each do |bc| %>
+                <%= link_to bc.name,{controller: "posts", action: "list",cat: bc.id},{class: "dropdown-item"} %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="col-sd-2 sr-3">
+          <div class="dropdown">
+            <button class="btn btn-primary btn-round dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Etiketler
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <%= link_to "Tüm yazılar",{controller: "posts", action: "index"},{class: "dropdown-item"} %>
+              <% Tag.scp_post_tags.each do |tag| %>
+                <%= link_to tag.tag,{controller: "posts", action: "list",tag: tag.tag},{class: "dropdown-item"} %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% if !@PageTitle.blank? %>
+      <div class="row">
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-6">
+            <hr/>
+            <h6 class="text-center"><%= @PageTitle %></h6>
+            <hr/>
+        </div>
+        <div class="col-md-3">
+        </div>
+      </div>
+      <% end %>
+      <div class="row">
+
+        <% @posts.each_with_index do |post,i| %>
+
+          <% if i == 0 %>
+            <div class="col-md-12">
+              <div class="card">
+                <%= link_to(post) do %>
+                  <img class="card-img-top" src="<%= url_for(post.post_img_url) %>" alt="Card image cap">
+                <% end %>
+                <div class="card-body">
+                  <%= link_to(post) do %>
+                  <h4 class="card-title"><%= post.title %></h4>
+                  <% end %>
+                  <p class="card-text"><%= strip_tags(post.content).truncate(200) %></p>
+                  <h5 class="small">Kategori: <%= link_to post.blog_category.name ,controller: "posts", action: "list",cat: post.blog_category.id %></h5>
+                  <% if post.tags.size > 0 %>
+                    <h5 class="small">Etiketler:
+                      <% post.tags.each do |tag| %>
+                        <%= link_to controller: "posts", action: "list",tag: tag.tag do %>
+                          <span class="badge badge-primary"><%= tag.tag %></span>
+                        <% end %>
+                      <% end %>
+                    </h5>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% else %>
+            <div class="col-md-6">
+              <div class="card">
+                <%= link_to(post) do %>
+                  <img class="card-img-top" src="<%= url_for(post.post_img_url) %>" alt="Card image cap">
+                <% end %>
+                <div class="card-body">
+                  <%= link_to(post) do %>
+                  <h4 class="card-title"><%= post.title %></h4>
+                  <% end %>
+                  <p class="card-text"><%= strip_tags(post.content).truncate(200) %></p>
+                  <h5 class="small">Kategori: <%= link_to post.blog_category.name ,controller: "posts", action: "list",cat: post.blog_category.id %></h5>
+                  <% if post.tags.size > 0 %>
+                    <h5 class="small">Etiketler:
+                      <% post.tags.each do |tag| %>
+                        <%= link_to controller: "posts", action: "list",tag: tag.tag do %>
+                          <span class="badge badge-primary"><%= tag.tag %></span>
+                        <% end %>
+                      <% end %>
+                    </h5>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-2">
+    </div>
+  </div>
+</div>
+
+<% if power_user? %>
+<%= link_to 'Yeni Yazı', new_post_path %>
+<% end %>
